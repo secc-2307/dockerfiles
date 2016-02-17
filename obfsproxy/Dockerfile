@@ -14,7 +14,7 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 expose 450
-ENV LOG_MIN_SEVERITY no-log
+ENV LOG_MIN_SEVERITY error
 ENV DATA_DIR /var/lib/obfsproxy
 ENV PASSWORD XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ENV DEST_ADDR openvpn

@@ -13,8 +13,8 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-
-ENV LOG_MIN_SEVERITY info
+expose 450
+ENV LOG_MIN_SEVERITY no-log
 ENV DATA_DIR /var/lib/obfsproxy
 ENV PASSWORD XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ENV DEST_ADDR openvpn

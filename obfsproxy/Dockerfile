@@ -2,7 +2,8 @@
 # Dockerfile for obfsproxy (scramblesuit)
 #
 
-FROM debian:jessie
+FROM haproxy:latest
+
 MAINTAINER kev<noreply@datageek.info>
 
 RUN apt-get update \
@@ -22,7 +23,8 @@ ENV DEST_PORT 1194
 ENV RUN_MODE server
 ENV LISTEN_ADDR 0.0.0.0
 ENV LISTEN_PORT 4911
-
+COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
+ENTRYPOINT haproxy -f /usr/local/etc/haproxy/haproxy.cfg
 CMD obfsproxy --log-min-severity=$LOG_MIN_SEVERITY \
               --data-dir=$DATA_DIR \
               scramblesuit \

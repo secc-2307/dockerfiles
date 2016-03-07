@@ -15,6 +15,8 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 expose 450
+expose 80
+expose 443
 ENV LOG_MIN_SEVERITY error
 ENV DATA_DIR /var/lib/obfsproxy
 ENV PASSWORD XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

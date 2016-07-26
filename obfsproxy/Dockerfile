@@ -2,8 +2,7 @@
 # Dockerfile for obfsproxy (scramblesuit)
 #
 
-FROM haproxy:latest
-
+FROM debian:jessie
 MAINTAINER kev<noreply@datageek.info>
 
 RUN apt-get update \
@@ -15,8 +14,6 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 expose 450
-expose 80
-expose 443
 ENV LOG_MIN_SEVERITY error
 ENV DATA_DIR /var/lib/obfsproxy
 ENV PASSWORD XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -25,8 +22,7 @@ ENV DEST_PORT 1194
 ENV RUN_MODE server
 ENV LISTEN_ADDR 0.0.0.0
 ENV LISTEN_PORT 4911
-COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
-ENTRYPOINT haproxy -f /usr/local/etc/haproxy/haproxy.cfg
+
 CMD obfsproxy --log-min-severity=$LOG_MIN_SEVERITY \
               --data-dir=$DATA_DIR \
               scramblesuit \
@@ -34,4 +30,3 @@ CMD obfsproxy --log-min-severity=$LOG_MIN_SEVERITY \
               --dest=$DEST_ADDR:$DEST_PORT \
               $RUN_MODE \
               $LISTEN_ADDR:$LISTEN_PORT
-
